@@ -1,0 +1,130 @@
+% lark-eunis16.tex
+% 
+\documentclass[ignorenonframetext]{beamer}
+
+% -------------------- PREAMBLE
+
+% ----- customizations
+
+\input{preamble/packages}
+\input{preamble/extras}
+\input{preamble/customizations}
+
+\sloppy
+
+% ---------- DATE
+% 
+
+\newcommand{\datestring}{Mar. 20, 2017}
+\date%
+[\datestring]%
+{\footnotesize \datestring}
+
+% ---------- TITLE
+%
+\title%
+[Android Studio Development]%
+{ Android Development using Android Studio% \\
+  % \emph{Learning with Computer-Assisted Guided Tours}%
+}
+
+
+% ---------- CONFERENCE
+%
+\subtitle%
+{ \footnotesize BEST Mobile App Development }
+
+
+
+% ---------- AUTHORS
+%
+\author%
+[\emph{D. Floros}, K. Mylonakis]%
+{%
+  \imentry{dimitris-floros.png}{\emph{Dimitris Floros}} \and%
+  \imentry{kostas-mylonakis.png}{Kostas Mylonakis}%
+}
+
+
+% ---------- AFFILIATIONS
+\institute%
+[]%
+{%
+  Department of Electrical and Computer Engineering,
+  Aristotle University of Thessaloniki%
+}
+
+
+
+% -------------------- MAIN MATTER
+
+\begin{document}
+\frame[plain]{\titlepage}
+
+\frame{\tableofcontents[]}
+
+\mode<all>
+
+%---- INTRODUCTION --------
+
+\section{Introduction}
+\label{sec:introduction}
+\input{sections/introduction}
+
+
+% ---------- ANDROID PLATFORM
+
+\section{Android Platform}
+\label{sec:android-platform}
+
+
+% ---------- PLATFORM ARCHITECTURE
+
+\section{Platform Architecture}
+\label{sec:platform-architecture}
+
+
+% ---------- BUILDING BLOCKS
+
+\section{Building Blocks}
+\label{sec:building-blocks}
+
+
+% ---------- ANDROID STUDIO
+
+\section{Android Studio}
+\label{sec:android-studio}
+
+% ---------- HELLO ANDROID
+
+\section{Hello Android Application}
+\label{sec:hello-android}
+
+
+% ---------- ACKNOWLEDGMENTS
+
+\section{Acknowledgments}
+\input{sections/acknowledgment}
+
+% ================= references =========================
+
+\nocite{*}
+\mode*
+\appendix
+\backupbegin
+\begin{frame}[plain, allowframebreaks]
+    \frametitle{References}
+    \bibliographystyle{abbrvnat}
+    {\tiny \bibliography{ref.bib}}
+\end{frame}
+\backupend
+
+\end{document}
+
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

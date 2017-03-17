@@ -1,0 +1,46 @@
+% preamble-customizations.tex
+
+
+% fix Linux Adobe Acrobat Reader's issue with transparent image elements
+% \pdfpageattr{/Group << /S /Transparency /I true /CS /DeviceRGB>>}
+
+
+% define coloured clickable links
+\hypersetup{%
+  pdffitwindow=false,%
+  pdfstartview={FitH},%
+  % colorlinks,%
+  pdfauthor={},%
+  pdftitle={},%
+  pagebackref=true,%
+  citecolor=PaleGreen4,%
+  filecolor=DarkOrchid4,%
+  % linkcolor=OrangeRed4,%
+  urlcolor=RoyalBlue4%
+}
+
+% define the includegraphics search path
+\graphicspath{%
+  {figs/}%
+}
+
+% short-hand command for hyperlinked e-mails
+\newcommand{\email}[1]{\href{mailto:#1}{\texttt{#1}}}
+
+% redefine \boxed command to allow setting the border color
+\newcommand{\highlight}[1]{\fcolorbox{complclr1}{white}{$\displaystyle #1$}}
+
+% modified bullet-point for highlighting
+\newcommand{\bulletemph}{$\large\boldsymbol{\star}$}
+
+% command to output names under images
+\newcommand{\imentry}[3][1.25cm]{%
+  \vbox{\halign{\hfil##\hfil\cr%
+      \includegraphics[height=#1]{#2}\cr#3\cr}}}
+
+\definecolor{custom_theme}{HTML}{91043D}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../android-studio-main"
+%%% End:
