@@ -1,6 +1,15 @@
 % lark-eunis16.tex
 % 
+
+\ifdefined\handout         % ----- IEEE HPEC conference proceedings
+
+\documentclass[ignorenonframetext,handout]{beamer}
+
+\else
+
 \documentclass[ignorenonframetext]{beamer}
+
+\fi
 
 % -------------------- PREAMBLE
 
@@ -69,7 +78,15 @@
 
 \section{Introduction}
 \label{sec:introduction}
+
+% general introduction
 \input{sections/introduction}
+
+% android devices possibilities
+\input{sections/android-devices}
+
+% online resources
+\input{sections/online-resources}
 
 
 % ---------- ANDROID PLATFORM
@@ -77,6 +94,11 @@
 \section{Android Platform}
 \label{sec:android-platform}
 
+% image showing Android stack
+\input{sections/android-stack}
+
+% linux kernel
+\input{sections/linux-kernel}
 
 % ---------- PLATFORM ARCHITECTURE
 

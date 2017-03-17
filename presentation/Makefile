@@ -1,35 +1,59 @@
 SHELL := /bin/bash # Use bash syntax
-PDFLATEX = pdflatex
-BIBTEX   = bibtex
 
-MAIN = android-studio-main
 
-# "make" target
+##############################################################
+# COMMANDS
 
-all: pdf
+TMARK   = ^^^
+LATEX   = pdflatex
+LATEXMK = latexmk -pdf -pdflatex='pdflatex %O -interaction=nonstopmode -synctex=1 $(TMARK)'
+BIBTEX  = bibtex
+
+
+##############################################################
+# TARGET
+
+T_DOC = android-studio-main
+
+
+##############################################################
+# CUSTOM FLAG
+
+HANDOUT = \def\handout{true}
+
+
+##############################################################
+# COMPILATION
+
+all: presentation
+
+fast: fastpresentation
 
 # PDF compilation
 
-pdf:
-	$(PDFLATEX) $(MAIN).tex
-	$(BIBTEX)   $(MAIN)
-	$(PDFLATEX) $(MAIN).tex
-	$(PDFLATEX) $(MAIN).tex
+presentation:
+	$(LATEX)  $(T_DOC).tex
+	$(BIBTEX) $(T_DOC)
+	$(LATEX)  $(T_DOC).tex
+	$(LATEX)  $(T_DOC).tex
 
-# Fast compilation, where supported
+handout:
+	$(LATEX)  "$(HANDOUT) \input{$(T_DOC)}"
+	$(BIBTEX) $(T_DOC)
+	$(LATEX)  "$(HANDOUT) \input{$(T_DOC)}"
+	$(LATEX)  "$(HANDOUT) \input{$(T_DOC)}"
 
-fast:
-	latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode" $(MAIN).tex
+fastpresentation:
+	$(subst $(TMARK),"\input{$(T_DOC)}",$(LATEXMK)) $(T_DOC)
 
-# compilation without references
+fasthandout:
+	$(subst $(TMARK),"$(HANDOUT) \input{$(T_DOC)}",$(LATEXMK)) $(T_DOC)
 
-nobib:
-	$(PDFLATEX) $(MAIN).tex
-	$(PDFLATEX) $(MAIN).tex
 
-up:
-
+update:
 	pushd .. ; git pull ; popd
+
+up: update
 
 # clean-up
 clean:
