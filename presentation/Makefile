@@ -58,6 +58,7 @@ up: update
 # clean-up
 clean:
 	rm -f *.bbl *.blg *.log *.aux *.nav *.out *.snm *.synctex.gz *.toc *.pdf *.vrb *.bcf *.run.xml *.xwm
+	rm -f *.fls *.fdb_latexmk
 	rm -f sections/*.{log,bu}
 	rm -f *~
 	rm -f sections/*~
