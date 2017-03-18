@@ -5,9 +5,9 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
@@ -32,20 +32,34 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private Vibrator vibrator;
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume");
+        //Before registration the Sensor Events are not getting triggered
+        mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate");
         setContentView(R.layout.activity_main);
 
         //Initialize Android API sensor manager
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         //Initialize the accelerometer sensor
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        //Before registration the Sensor Events are not getting triggered
-        mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
 
         //Initialize the vibrator service
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause");
+        mSensorManager.unregisterListener(this, mAccelerometer);
     }
 
     @Override
@@ -84,6 +98,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-        Log.d(TAG,"onAccuracyChanged");
+        Log.d(TAG, "onAccuracyChanged");
     }
 }
