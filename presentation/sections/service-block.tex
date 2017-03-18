@@ -1,0 +1,43 @@
+% service-block.tex
+%
+%
+
+\begin{frame}
+  \frametitle{Service}
+  
+  \begin{itemize}
+  \item<1-> General purpose entry point for keeping an app running in
+    the background
+  
+  \item<2->[] Does not provide user interface
+
+  \item<3-> A service might play music in the background while the
+    user is in a different app
+
+  \item<4-> Another component can start the service and 
+
+    \begin{itemize}
+    \item<4-> Let it run
+    \item<4-> Bind to it for interaction
+    \end{itemize}
+
+  \item<5-> Two different types of services
+
+    \begin{itemize}
+    \item<6-> Foreground with a notification
+    \item<7-> Background without notification
+      \begin{itemize}
+      \item<7-> The user is not directly aware
+      \item<7-> Can be killed by the system if it needs \texttt{RAM}
+      \end{itemize}
+    \end{itemize}
+
+  \end{itemize}
+
+\end{frame}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../android-studio-main"
+%%% End:
