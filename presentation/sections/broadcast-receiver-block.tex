@@ -1,0 +1,42 @@
+% broadcast-receiver-block.tex
+%
+%
+
+\begin{frame}
+  \frametitle{Broadcast receiver}
+  
+  \begin{itemize}
+  \item<1-> Enables the system to deliver events to the app outside of
+    regular user flow
+  
+  \item<2-> Respond to system-wide broadcast announcements
+
+  \item<3-> System can deliver broadcast even to apps not currently running
+    \begin{itemize}
+    \item<4-> An app can schedule an alarm to post a notification
+      informing the user of an upcoming event
+    \item<5-> By delivering as a Broadcast receiver, the app does not
+      need to remain running
+    \end{itemize}
+    
+    
+  \item<6-> System broadcasts
+
+    \begin{itemize}
+    \item<6-> Low battery
+    \item<6-> Screen off
+    \end{itemize}
+
+    
+  \item<7-> Most commonly is used as a gateway to other components
+  \item<8-> Intended for minimal work
+
+  \end{itemize}
+
+\end{frame}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../android-studio-main"
+%%% End:
