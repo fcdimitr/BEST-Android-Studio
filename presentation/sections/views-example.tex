@@ -1,0 +1,55 @@
+% views-example.tex
+%
+%
+
+\begin{frame}[fragile]
+  \frametitle{Views}
+  \framesubtitle{Inflating activity layout}
+
+  To display a user interface you need to assign a View to an Activity
+
+\begin{lstlisting}
+@Override
+public void onCreate(Bundle bundle) {
+    super.onCreate(bundle);
+    setContentView(R.layout.main);
+    TextView textView = (TextView)findViewById(R.id.textView);
+}
+\end{lstlisting}
+
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Views}
+  \framesubtitle{Event listeners}
+
+  \begin{itemize}
+  \item<1-> Java event handling mechanism
+  \item<2-> Interfaces containing methods that are invoked on some
+    user action
+  \end{itemize}
+
+  \begin{exampleblock}{\texttt{OnClickListener}}
+\begin{lstlisting}
+private OnClickListener btnClicked = new OnClickListener() {
+    public void onClick(View v) {
+        // do something when button is clicked
+    }
+};
+protected void onCreate(Bundle bundle) {
+    // Capture our button from layout
+    Button btn = (Button) findViewById(R.id.btn);
+    // Register the onClick listener with the implementation above
+    btn.setOnClickListener(btnClicked);
+}
+\end{lstlisting}
+  \end{exampleblock}
+
+\end{frame}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../android-studio-main"
+%%% End:

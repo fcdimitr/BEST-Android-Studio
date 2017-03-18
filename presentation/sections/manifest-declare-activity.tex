@@ -1,0 +1,51 @@
+% manifest-declare-activity
+%
+%
+
+\begin{frame}[fragile]
+  \frametitle{Manifest}
+  \framesubtitle{Declare activity}
+  
+  You must declare your activity in the manifest file
+
+  \begin{exampleblock}{Example}
+    
+\begin{lstlisting}
+<manifest ... >
+  <application ... >
+    <activity android:name=".ExampleActivity" />
+        ...
+  </application ... >
+  ...
+</manifest>
+\end{lstlisting}
+
+
+  \end{exampleblock}
+
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Manifest}
+  \framesubtitle{Use intent filters}
+  
+  Declare how other application components may activate it
+
+  \begin{exampleblock}{Example}
+\begin{lstlisting}
+<activity android:name=".ExampleActivity" android:icon="@drawable/app_icon">
+    <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+    </intent-filter>
+</activity>
+\end{lstlisting}
+  \end{exampleblock}
+
+\end{frame}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../android-studio-main"
+%%% End:

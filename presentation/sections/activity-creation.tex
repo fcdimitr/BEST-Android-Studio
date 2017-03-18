@@ -1,0 +1,57 @@
+% activity-creation.tex
+%
+%
+
+
+\begin{frame}
+  \frametitle{Creating an Activity}
+  \framesubtitle{Part 1}
+
+  \begin{itemize}
+  \item<1-> To create an activity, you must create a subclass of
+    \texttt{Activity}
+
+  \item<2-> In your class you need to implement \texttt{callback
+      methods}
+
+    \begin{itemize}
+    \item<3-> \lstinline{onCreated()}
+    \item<4-> \lstinline{onPause()}
+    \item<5-> \lstinline{onStopped()}
+    \item<6-> \lstinline{onResumed()}
+    \item<7-> \lstinline{onDestroyed()}
+    \end{itemize}
+  \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Creating an Activity}
+  \framesubtitles{Part 2}
+
+  
+  \begin{itemize}
+  \item<1-> \lstinline{onCreated()}
+
+    \begin{itemize}
+    \item<2-> Called when created
+    \item<3-> Initialization done here
+    \end{itemize}
+
+  \item<4-> \lstinline{onPause()}
+
+    \begin{itemize}
+    \item<5-> Called when user leaves activity
+    \item<6-> Commit persistent changes
+    \end{itemize}
+
+  \end{itemize}
+
+\end{frame}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../android-studio-main"
+%%% End:

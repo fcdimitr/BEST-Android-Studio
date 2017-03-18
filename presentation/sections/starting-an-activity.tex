@@ -1,0 +1,27 @@
+% starting-an-activity.tex
+%
+%
+
+\begin{frame}[fragile]
+  \frametitle{Starting an Activity}
+  
+
+  You need to pass an \texttt{Indent} during the call to
+  \lstinline{startActivity()} that describes the activity you want to
+  start
+
+  \begin{exampleblock}{Example}
+\begin{lstlisting}
+Intent intent = new Intent(this, SignInActivity.class);
+startActivity(intent);
+\end{lstlisting}
+  \end{exampleblock}
+
+  You can shutdown an activity by its \lstinline{finish()} method
+
+\end{frame}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../android-studio-main"
+%%% End:
