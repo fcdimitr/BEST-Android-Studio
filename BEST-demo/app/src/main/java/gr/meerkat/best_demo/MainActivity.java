@@ -9,12 +9,14 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Switch;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
     private final String TAG = this.getClass().getSimpleName();
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
+    private Switch mSwitch;
     //Accelerometer axis
     private float x = 0;
     private float y = 0;
@@ -32,14 +34,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private Vibrator vibrator;
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        Log.d(TAG, "onResume");
-        //Before registration the Sensor Events are not getting triggered
-        mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "onCreate");
@@ -53,12 +47,25 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         //Initialize the vibrator service
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
+        mSwitch = (Switch) findViewById(R.id.switchview);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume");
+        //Before registration the Sensor Events are not getting triggered
+        mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+
+        mSwitch.setChecked(false);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
         Log.d(TAG, "onPause");
+        //Stop getting sensor events
         mSensorManager.unregisterListener(this, mAccelerometer);
     }
 
@@ -90,7 +97,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 lastY = y;
                 lastZ = z;
 
-                vibrator.vibrate(500);
+                if(mSwitch.isChecked()) {
+                    vibrator.vibrate(500);
+                }
             }
         }
 
