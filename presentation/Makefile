@@ -20,6 +20,7 @@ T_DOC = android-studio-main
 # CUSTOM FLAG
 
 HANDOUT = \def\handout{true}
+WIDE    = \def\widescreen{true}
 
 
 ##############################################################
@@ -37,6 +38,12 @@ presentation:
 	$(LATEX)  $(T_DOC).tex
 	$(LATEX)  $(T_DOC).tex
 
+presentation-169:
+	$(LATEX)  "$(WIDE) \input{$(T_DOC)}"
+	$(BIBTEX) $(T_DOC)
+	$(LATEX)  "$(WIDE) \input{$(T_DOC)}"
+	$(LATEX)  "$(WIDE) \input{$(T_DOC)}"w
+
 handout:
 	$(LATEX)  "$(HANDOUT) \input{$(T_DOC)}"
 	$(BIBTEX) $(T_DOC)
@@ -45,6 +52,9 @@ handout:
 
 fastpresentation:
 	$(subst $(TMARK),"\input{$(T_DOC)}",$(LATEXMK)) $(T_DOC)
+
+fastpresentation-169:
+	$(subst $(TMARK),"$(WIDE) \input{$(T_DOC)}",$(LATEXMK)) $(T_DOC)
 
 fasthandout:
 	$(subst $(TMARK),"$(HANDOUT) \input{$(T_DOC)}",$(LATEXMK)) $(T_DOC)

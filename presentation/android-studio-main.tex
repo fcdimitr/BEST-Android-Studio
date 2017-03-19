@@ -6,8 +6,15 @@
 \documentclass[ignorenonframetext,handout]{beamer}
 
 \else
+\ifdefined\widescreen
+
+\documentclass[ignorenonframetext,aspectratio=169]{beamer}
+
+\else
 
 \documentclass[ignorenonframetext]{beamer}
+
+\fi
 
 \fi
 
