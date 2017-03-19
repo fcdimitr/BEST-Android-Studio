@@ -12,6 +12,8 @@ import android.util.Log;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
     private final String TAG = this.getClass().getSimpleName();
@@ -95,10 +97,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             // find force value by F = sqrt( (dx)^2 + (dy)^2 + (dz)^2 )
             float force = Math.abs( (x - lastX) * (x - lastX) +
                                     (y - lastY) * (y - lastY) +
-                                    (z - lastZ) * (z - lastZ));
+                                    (z - lastZ) * (z - lastZ) );
 
             // update text view
-            forceValue.setText( String.format("%.02f", force) );
+            forceValue.setText( String.format( Locale.US, "%.02f", force) );
 
             // update last values
             lastX = x;
@@ -106,7 +108,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             lastZ = z;
 
             if (Float.compare(force, forceThreshold) > 0) {
-                Log.d(TAG, "Movement Detected: (" + x + ", " + y + ", " + z + ")" + " force: " + force + " after: " + timeDiff + "ms");
+
+                String movementLog =
+                        String.format( Locale.US,
+                                "Movement Detected: (%.2f, %.2f, %.2f) force: %.2f after: %d ms",
+                                x, y, z, force, timeDiff);
+
+                Log.d(TAG, movementLog);
                 previous = now;
 
                 if(mSwitch.isChecked()) {
