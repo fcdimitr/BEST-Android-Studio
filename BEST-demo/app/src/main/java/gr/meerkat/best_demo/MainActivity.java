@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     private float lastX = 0;
     private float lastY = 0;
     private float lastZ = 0;
-    private static final float forceThreshold = 40.0f;
+    private static final float forceThreshold = 70.0f;
     private long previous = 0;
 
     //The vibration object
