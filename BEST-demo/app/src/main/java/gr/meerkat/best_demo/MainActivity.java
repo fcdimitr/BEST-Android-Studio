@@ -10,26 +10,23 @@ import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Switch;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
     private final String TAG = this.getClass().getSimpleName();
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
+
+    // View related
     private Switch mSwitch;
-    //Accelerometer axis
-    private float x = 0;
-    private float y = 0;
-    private float z = 0;
+    private TextView forceValue;
     private float lastX = 0;
     private float lastY = 0;
     private float lastZ = 0;
-    private float force = 0;
-    private float forceThreshold = 5.0f;
-    //Time deltas
-    private long now = 0;
-    private long timeDiff = 0;
+    private static final float forceThreshold = 40.0f;
     private long previous = 0;
+
     //The vibration object
     private Vibrator vibrator;
 
@@ -39,15 +36,20 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         Log.d(TAG, "onCreate");
         setContentView(R.layout.activity_main);
 
-        //Initialize Android API sensor manager
+        // Initialize Android API sensor manager
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        //Initialize the accelerometer sensor
+
+        // Initialize the accelerometer sensor
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
-        //Initialize the vibrator service
+        // Initialize the vibrator service
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
+        // Find the switch in the view
         mSwitch = (Switch) findViewById(R.id.switchview);
+
+        // Find the force value TextField
+        forceValue = (TextView) findViewById(R.id.force_value);
 
     }
 
@@ -74,10 +76,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         //Log.d(TAG,"onSensorChanged");
 
         //Read x,y,z acceleration
-        x = sensorEvent.values[0];
-        y = sensorEvent.values[1];
-        z = sensorEvent.values[2];
-        now = System.currentTimeMillis();
+        float x = sensorEvent.values[0];
+        float y = sensorEvent.values[1];
+        float z = sensorEvent.values[2];
+        long now = System.currentTimeMillis();
 
         if (previous == 0) { //First run of accelerometer
             previous = now;
@@ -86,16 +88,26 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             lastZ = z;
 
         } else {
-            timeDiff = now - previous;
 
-            force = Math.abs(x + y + z - lastX - lastY - lastZ);
+            // get time difference
+            long timeDiff = now - previous;
+
+            // find force value by F = sqrt( (dx)^2 + (dy)^2 + (dz)^2 )
+            float force = Math.abs( (x - lastX) * (x - lastX) +
+                                    (y - lastY) * (y - lastY) +
+                                    (z - lastZ) * (z - lastZ));
+
+            // update text view
+            forceValue.setText( String.format("%.02f", force) );
+
+            // update last values
+            lastX = x;
+            lastY = y;
+            lastZ = z;
 
             if (Float.compare(force, forceThreshold) > 0) {
                 Log.d(TAG, "Movement Detected: (" + x + ", " + y + ", " + z + ")" + " force: " + force + " after: " + timeDiff + "ms");
                 previous = now;
-                lastX = x;
-                lastY = y;
-                lastZ = z;
 
                 if(mSwitch.isChecked()) {
                     vibrator.vibrate(500);

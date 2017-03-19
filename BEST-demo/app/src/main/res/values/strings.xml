@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">BEST-demo</string>
+    <string name="force_value">Force value:</string>
+    <string name="n_a">#N/A</string>
+    <string name="vibration">Vibration:</string>
 </resources>
