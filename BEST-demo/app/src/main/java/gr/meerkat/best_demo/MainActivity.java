@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     // View related
     private Switch mSwitch;
     private TextView forceValue;
+
+    // Sensor related
     private float lastX = 0;
     private float lastY = 0;
     private float lastZ = 0;
